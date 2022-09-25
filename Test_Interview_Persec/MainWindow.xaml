@@ -1,0 +1,59 @@
+﻿<Window x:Class="Test_Interview_Persec.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:local="clr-namespace:Test_Interview_Persec"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Margin="43,55,0,0" VerticalAlignment="Top">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True" />
+                    <Setter Property="Text" Value="{Binding Path=SelectedDate, StringFormat='yyyy/MM', RelativeSource={RelativeSource AncestorType=DatePicker}}"></Setter>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <Label Content="Start Date" HorizontalAlignment="Left" Margin="43,29,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="EndDate" HorizontalAlignment="Left" Margin="166,55,0,0" VerticalAlignment="Top">
+            <DatePicker.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="IsReadOnly" Value="True" />
+                    <Setter Property="Text" Value="{Binding Path=SelectedDate, StringFormat='yyyy/MM', RelativeSource={RelativeSource AncestorType=DatePicker}}"></Setter>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <Label Content="End Date" HorizontalAlignment="Left" Margin="166,29,0,0" VerticalAlignment="Top"/>
+        <Button Content="Search" HorizontalAlignment="Left" Margin="290,57,0,0" VerticalAlignment="Top" Click="Button_Click" Width="82"/>
+        <DataGrid Name="dataList" d:ItemsSource="{d:SampleData ItemCount=5}" Visibility="Collapsed" Margin="22,112,128,18" AutoGenerateColumns="False" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="No." Binding="{Binding Path=No}" Width="50"></DataGridTextColumn>
+                <DataGridTextColumn Header="Title" Binding="{Binding Path=Title}" Width="150"></DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Url}" 
+                                    HorizontalAlignment="Center"
+                                    Height="210" 
+                                    VerticalAlignment="Center"
+                                    Width="335">
+                                </Image>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Explanation: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Foreground="MidnightBlue" Text="{Binding Explanation}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <TextBlock Name="Error" HorizontalAlignment="Left" Margin="45,104,0,0" TextWrapping="Wrap" Text="" Visibility="Collapsed" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
